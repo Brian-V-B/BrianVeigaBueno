@@ -61,12 +61,10 @@ namespace UD02 {
         /// </summary>
         private void AttackBehaviour() {
             if (_projectile != null && Input.GetButtonDown("Fire1")) { // Null check y check de input.
-                animator.SetBool("Wave", true); // Se activa el estado de "Wave" en el animator.
+                animator.SetTrigger("Attack"); // Se activa el estado de atacar.
                 FlowersProjectile p = Instantiate(_projectile, _fireLocation.position, _fireLocation.rotation); // Se instancia el proyectil y se guarda.
                 p.GetComponent<Rigidbody>().AddForce(p.transform.forward * _projectileLaunchPower, ForceMode.VelocityChange); // Se coje el RigidBody del proyectil y se le dá una fuerza.
             }
-            else
-                animator.SetBool("Wave", false); // Si no se cumple lo anterior, se borra el estado de "Wave" en el animator.
         }
 
         /// <summary>
@@ -74,6 +72,7 @@ namespace UD02 {
         /// </summary>
         private void Jump() {
             rigidBody.AddForce(Vector3.up * _jumpPower, ForceMode.VelocityChange); // Se aplica la fuerza verticalmente, nada especial.
+            animator.SetTrigger("Jump"); // Se activa la animación de saltar.
         }
 
 
